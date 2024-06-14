@@ -40,7 +40,9 @@ SELINUX=enforcing
 
 
 
-
+```
+semanage permissive --add httpd_t
+```
 
 
 
