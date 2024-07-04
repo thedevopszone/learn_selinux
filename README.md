@@ -97,6 +97,59 @@ Important!!!! Diferent types can non communicate wich each other. For example: h
 
 
 
+## Type Enforcement
+
+```
+ls -lZ /etc/passwd
+system_u:object_r:passwd_file_t:s0
+
+```
+
+## Change SELinux contexts
+
+```
+chcon -t httpd_sys_content_t /var/www/html/index.html
+
+# Reference a known god type (for example the directory the file is in)
+chcon --reference /var/www/html /var/www/html/index.html
+
+# Set to SELinux default again
+restorecon -vR /var/www/html   # v=verbose R=recursive
+
+```
+
+## Preserve (bewahren) SELinux contexts
+
+When you copy or move files, there SELinux contexts can change. Use --preserve to keep their context
+```
+cp --preserve=context file1 /tmp/
+```
+
+
+
+## Permanent changes
+
+Note: 
+- Label changes made by chcon will not survive a labeling process.
+- To make permanent use: semanage fcontext, folowed by: restorecon
+```
+semanage fcontext -a [option] [filename] [directory]
+restorecon -v [filename] [directory]
+```
+
+Example
+```
+semanage fcontext -a -t httpd_sys_content_t /var/www/html/index.html
+
+restorecon -v httpd_sys_content_t /var/www/html/index.html
+
+# Note: semanage fcontext writes in /etc/selinux/targeted/contexts/files to save permanent
+```
+
+
+
+
+
 ## The Labeling-System
 
 SELinux is a Labeling-System. Every process, every file, every directory and every system object (ports. etc) has and defined label set, named SELinux context.  
