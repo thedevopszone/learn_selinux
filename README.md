@@ -308,6 +308,11 @@ restorecon -FR -v /home/tmundt
 ```
 
 
+```
+setsebool -P user_exec_content off
+```
+
+
 ## The Labeling-System
 
 SELinux is a Labeling-System. Every process, every file, every directory and every system object (ports. etc) has and defined label set, named SELinux context.  
