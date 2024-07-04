@@ -147,6 +147,39 @@ restorecon -v httpd_sys_content_t /var/www/html/index.html
 ```
 
 
+## Booleans (Rules)
+
+List all booleans
+```
+getsebool -a
+# or
+semanage boolean -l   # much better with description
+```
+
+
+Set boolean
+```
+setsebool -P ftpd_anon_write on    # -P persistant
+```
+
+Example 1: The webserver service want to access user home directories
+```
+semanage boolean -l | grep http | grep home
+httpd_enable_home_dirs (off, off) Allow httpd to enable homedirs
+
+setsebool -P httpd_enable_homedirs on
+```
+
+Example 2: The webserver should be able to use sendmail
+```
+semanage boolean -l | grep http | sendmail
+httpd_can_sendmail
+
+setsebool -P httpd_can_sendmail on
+```
+
+
+
 
 
 
