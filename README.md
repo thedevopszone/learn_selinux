@@ -179,6 +179,29 @@ setsebool -P httpd_can_sendmail on
 ```
 
 
+## Troubleshooting SELinux
+
+SeLinux logs to: /var/log/audit/audit.log
+
+You can use tools to troubleshoot SELinux
+```
+setroubleshoot
+setroubleshoot-server
+
+dnf install setroubleshoot
+dnf install setroubleshoot-server
+ausearch and audit2allow
+
+# Important, you have to restart the auditd service
+service auditd restart
+
+# Usage
+sealert -a /var/log/audit/audit.log
+
+```
+
+
+
 
 
 
