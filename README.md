@@ -154,6 +154,10 @@ List all booleans
 getsebool -a
 # or
 semanage boolean -l   # much better with description
+
+# Apache
+semanage boolean -l | grep httpd
+
 ```
 
 
