@@ -50,6 +50,8 @@ semanage permissive --add httpd_t
 
 
 ```
+getenforce
+# or
 sestatus
 
 permissive = logs but allows
