@@ -9,6 +9,55 @@
 How to get the actual mode:
 ```
 getenforce
+
+setenforce 1
+```
+
+
+This file must be present in root directory /
+```
+ls -al /.autorelabel
+```
+
+
+## Policies
+
+- Policies is a set of rules that tells Linux how to operate.
+- Policies are defined in the file: /etc/sysconfig/selinux
+
+There are 3 types that can be set in: /etc/sysconfig/selinux
+```
+SELINUXTYPE=targeted  # Most secure, protects all services
+SELINUXTYPE=minimum   # Only protects some of the services
+SELINUXTYPE=mls
+```
+
+## Labels
+
+
+- A label can also be seen as a tag
+- The labels are also known as types
+- Every object that can be handled by SeLinux has a tag (files, ports, directories, users, processes etc.)
+- This labels are used to create rules that defines which object can communicate with other objects
+- Example: Can the webservice communcate with the user home directory
+
+
+```
+ls -l
+
+#And now with types
+ls -lZ
+
+... system_u:object_r:user_home_t:s0    # This is the SELinux context
+
+system_u = SELinux user  _u
+object_r = SELinux role   _r
+user_home_t = SELinux type (label)   _t
+```
+
+Apache types as an example
+```
+
 ```
 
 
@@ -35,6 +84,8 @@ So setzt man SELinux dauerhaft auf den Enforcing Mode (was der Standard-Einstell
 
 vi /etc/sysconfig/selinux
 ```
+SELINUX=disabled
+SELINUX=permissive
 SELINUX=enforcing
 ```
 
