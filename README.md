@@ -80,6 +80,17 @@ tcp6       0      0 :::22                   :::*                    LISTEN      
 netstat -lZ | grep httpd
 unix  2      [ ACC ]     STREAM     LISTENING     82834    50453/httpd          system_u:system_r:httpd_t:s0
 
+
+# Process
+ps axZ | grep httpd
+system_u:system_r:httpd_t:s0      50452 ?        Ss     0:00 /usr/sbin/httpd -DFOREGROUND
+system_u:system_r:httpd_t:s0      50453 ?        S      0:00 /usr/sbin/httpd -DFOREGROUND
+system_u:system_r:httpd_t:s0      50454 ?        Sl     0:00 /usr/sbin/httpd -DFOREGROUND
+system_u:system_r:httpd_t:s0      50455 ?        Sl     0:00 /usr/sbin/httpd -DFOREGROUND
+system_u:system_r:httpd_t:s0      50456 ?        Sl     0:00 /usr/sbin/httpd -DFOREGROUND
+unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 50903 pts/0 S+   0:00 grep --color=auto httpd
+
+
 ```
 
 Important!!!! Diferent types can non communicate wich each other. For example: httpd_config_t => httpd_exec_t. We have to fix that.
