@@ -214,9 +214,25 @@ sealert -a /var/log/audit/audit.log
 Fix by copy and paste what is shown in the report
 ```
 
+You can also look at journalctl
+```
+journalctl -xe  # x add explanation e jump to the end
+```
+
+
 ```
 setenforce enforcing
 ```
+
+
+
+## Confined Users, Booleans and sudo
+
+```
+
+```
+
+
 
 
 
