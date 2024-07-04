@@ -320,6 +320,36 @@ setsebool -P user_exec_content off
 ```
 
 
+## Change Apache Port to 8888
+
+```
+Is the port managed by SELinux rules?
+semanage port -l | grep 8888
+
+Change Apache Port to listen to port 8888
+Listen 8888
+
+systemctl restart httpd
+
+You get an error and because of the installed SELinux helper packets you get an better message in journalctl.
+
+semanage port -a -t PORT_TYPE -p tcp 8888
+But how do we get the PORT_TYPE?
+
+What PORT_TYPE does 80 use?
+Because thats ok!
+
+semanage port -l | grep http | grep 80
+http_port_t
+
+So:
+semanage port -a -t http_port_t -p tcp 8888
+
+sstemctl restart httpd
+```
+
+
+
 ## The Labeling-System
 
 SELinux is a Labeling-System. Every process, every file, every directory and every system object (ports. etc) has and defined label set, named SELinux context.  
