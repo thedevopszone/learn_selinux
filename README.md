@@ -57,8 +57,33 @@ user_home_t = SELinux type (label)   _t
 
 Apache types as an example
 ```
+ls -lZ /usr/sbin/httpd
+system_u:object_r:httpd_exec_t:s0    # httpd_exec_t => httpd executetable type
+
+ls -dZ /etc/httpd
+system_u:object_r:httpd_config_t
+
+ls -dZ /var/log/httpd
+system_u:object_r:httpd_log_t:s0
+
+ls -dZ /var/www/html
+system_u:object_r:httpd_sys_content_t:s0
+
+# Ports
+netstat -ntlpZ
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name     Security Context
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      20882/sshd: /usr/sb  system_u:system_r:sshd_t:s0-s0:c0.c1023
+tcp6       0      0 :::80                   :::*                    LISTEN      50452/httpd          system_u:system_r:httpd_t:s0
+tcp6       0      0 :::22                   :::*                    LISTEN      20882/sshd: /usr/sb  system_u:system_r:sshd_t:s0-s0:c0.c1023
+
+#or
+netstat -lZ | grep httpd
+unix  2      [ ACC ]     STREAM     LISTENING     82834    50453/httpd          system_u:system_r:httpd_t:s0
 
 ```
+
+Important!!!! Diferent types can non communicate wich each other. For example: httpd_config_t => httpd_exec_t. We have to fix that.
+
 
 
 ## The Labeling-System
