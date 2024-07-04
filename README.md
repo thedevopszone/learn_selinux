@@ -228,14 +228,84 @@ setenforce enforcing
 
 ## Confined Users, Booleans and sudo
 
+You can map an Linux user to an SELinux user
+
+List the user mappings
+```
+semanage login -l
+
+Login Name           SELinux User         MLS/MCS Range        Service
+__default__          unconfined_u         s0-s0:c0.c1023       *      # __default__ is for all users
+root                 unconfined_u         s0-s0:c0.c1023       *
+```
+
+There are some predefined SELinux users
+```
+sysadm_u
+staff_u
+user_u
+guest_u
+xguest_u
 ```
 
 ```
+semanage login -m -S targeted -s "user_u" -r s0 __default__
+
+semanage login -l
+
+Now every user per deault is mapped to the SELinux user user_u after login
+
+Login Name           SELinux User         MLS/MCS Range        Service
+__default__          user_u         s0-s0:c0.c1023       *      # __default__ is for all users
+root                 unconfined_u         s0-s0:c0.c1023       *
+
+For the user: user_u there are rules defined
+
+```
 
 
+Check what SELinux user my Linux user is mapped to
+```
+id -Z
+```
+
+Map an SeLinux user to an Linux user
+```
+semanage login -a -s staff_u cloud_user
+
+semanage login -l
+
+# Remove again
+semanage login -d cloud_user
+
+semanage login -l
+```
 
 
+## sudo
 
+If a user is not in the SELinux role unconfined_r, only sysadm_r and staff_r roles Users are allowed to use sudo
+
+Add a user to a SELinux role
+```
+semanage login -a -s "staff_u" tmundt
+```
+
+Add an role to an existing SELinux user
+```
+semanage user -m -R "staff_r" "user_u"  # m modify, r role
+```
+
+Add sudo rigths 
+```
+vi /etc/sudoers
+
+tmundt ALL=(ALL) TYPE=administrator_t
+ROLE=administrator_t /bin/sh
+
+
+restorecon -FR -v /home/tmundt
+```
 
 
 ## The Labeling-System
