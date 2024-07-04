@@ -201,6 +201,22 @@ sealert -a /var/log/audit/audit.log
 ```
 
 
+## Troubleshooting SELinux Non_complient Apps
+
+```
+setenfoce permisive
+```
+
+Use sealert to create a problem report
+```
+sealert -a /var/log/audit/audit.log
+
+Fix by copy and paste what is shown in the report
+```
+
+```
+setenforce enforcing
+```
 
 
 
