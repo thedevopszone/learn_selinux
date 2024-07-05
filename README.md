@@ -219,6 +219,11 @@ setenforce 1
 
 # Now get the error messages
 grep sealert /var/log/messages
+
+cat /etc/services
+
+semanage port -a -t http_port_t -p tcp 85
+
 ```
 
 
