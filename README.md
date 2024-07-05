@@ -208,6 +208,21 @@ sealert -a /var/log/audit/audit.log
 ```
 
 
+```
+# You can disable selinux
+setenforce 0
+
+# If its working, you have a SELinux problem
+
+# Enable SELinux again
+setenforce 1
+
+# Now get the error messages
+grep sealert /var/log/messages
+```
+
+
+
 ## Troubleshooting SELinux Non_complient Apps
 
 ```
