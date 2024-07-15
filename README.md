@@ -483,3 +483,37 @@ semanage port -a -t http_port_t -p tcp 9090
 
 ```
 
+
+
+```
+semanage fcontext -l
+semanage port
+
+
+
+
+/web/index.html
+httpd_t => default_t
+
+semanage fcontext -a -t httpd_sys_content_t "/web(/.*)?" # Set
+restorecon -R -v /web    # Save
+
+# Booleans
+
+List all booleans
+getsebool -a
+better
+semanage boolean -l
+
+# Show what a boolean defines
+sesearch -b ftpd_anon_write -ACT
+
+# Without type_transition
+sesearch -b ftpd_anon_write -ACT | grep -v type_transit
+
+setsebool -P ftpd_ano_write on
+
+
+```
+
+
