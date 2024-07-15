@@ -516,6 +516,9 @@ setsebool -P ftpd_ano_write on
 
 semanage port -a -t http_port_t -p tcp 16700
 
+
+grep http /var/log/audit/audit.log | audit2why
+
 ```
 
 
