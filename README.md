@@ -514,6 +514,8 @@ sesearch -b ftpd_anon_write -ACT | grep -v type_transit
 setsebool -P ftpd_ano_write on
 
 
+semanage port -a -t http_port_t -p tcp 16700
+
 ```
 
 
