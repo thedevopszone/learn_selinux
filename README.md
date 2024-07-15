@@ -449,3 +449,37 @@ semanage port -d -p tcp 2030
 
 
 ```
+
+
+
+```
+SELINUX
+chcon -Rt httpd_sys_content_t /home/tmundt/test/logs
+
+ls -lZ /home/tmundt/test/logs
+
+Allow HTTP servers to connect to other backends
+setsebool -P httpd_can_network_connect on
+
+Allow HTTP servers to read files from user directory
+setsebool -P httpd_enable_homedirs on
+
+Allow HTTP servers to read files from user directory
+chcon -Rt httpd_sys_content_t /file/path
+
+man semanage-fcontext
+
+Add another Port for Apache: Listen 9090
+semanage port -l | grep http
+semanage port --help
+semanage port -a -t http_port_t -p 9090
+
+Get error messages
+audit2allow -a -w
+# Do not execute the commands shown in the log!!!
+Better:
+semanage port -a -t http_port_t -p tcp 9090
+
+
+```
+
