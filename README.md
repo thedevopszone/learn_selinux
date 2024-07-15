@@ -1,5 +1,10 @@
 # Learn selinux
 
+## Links
+
+- https://www.youtube.com/watch?v=tXNr3gOgrn8
+
+
 ## The 3 modes
 
 - Enforcing: Look at /var/log/audit/audit.log
