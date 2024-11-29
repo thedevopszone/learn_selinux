@@ -521,7 +521,7 @@ grep http /var/log/audit/audit.log | audit2why
 
 ```
 
-## Yannic
+## Schulung von Y
 
 ```
 ll /root -Z
