@@ -530,7 +530,7 @@ root root system_u:object_r:admin_home_t:s0
 admin_home_t ist der für uns wichtige Teil
 ```
 
-
+```
 systemctl
 labels
 
@@ -550,6 +550,44 @@ Funktioniert nicht
 
 Failed to start the Apache server
 Permission denied
+```
 
+```
+dnf install settroubleshoot
+
+# Gibt eine Anleitung was zu tun ist
+sealert -l "*"
+
+semanage port -a -t PORT_TYPE -p tcp 12345
+
+semanage port -l  | grep http
+
+semanage port -a -t http_port_t -p tcp 12345
+semanage port -l  | grep http
+
+ll /var/www/html -Z
+
+ll -Z ./root.html
+
+sealert -l "*"
+
+semanage booleans -l
+
+semanage fcontext -l | grep /var/www/html
+
+touch /.autorelable
+fixfiles --help
+
+sealert -a /var/log/audit/audit.log
+
+semanage permissive -a httpd_t
+
+
+
+
+
+
+
+```
 
 
