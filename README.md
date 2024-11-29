@@ -521,4 +521,35 @@ grep http /var/log/audit/audit.log | audit2why
 
 ```
 
+## Yannic
+
+```
+ll /root -Z
+
+root root system_u:object_r:admin_home_t:s0
+admin_home_t ist der für uns wichtige Teil
+```
+
+
+systemctl
+labels
+
+labels steuert was erlaubt ist
+
+ss -tulpen -Z
+
+Regeln anzeigen
+sesearch -A -s httpd_t http_sys_content_t
+
+
+Apache
+Listen 12345
+
+systemctl restart httpd
+Funktioniert nicht
+
+Failed to start the Apache server
+Permission denied
+
+
 
