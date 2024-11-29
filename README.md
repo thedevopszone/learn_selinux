@@ -553,7 +553,7 @@ Permission denied
 ```
 
 ```
-dnf install settroubleshoot
+dnf install setroubleshoot
 
 # Gibt eine Anleitung was zu tun ist
 sealert -l "*"
